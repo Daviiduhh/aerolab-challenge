@@ -1,7 +1,6 @@
 <template>
   <main>
     <Header />
-    <CardPoints/>
     <Hero />
     <Store />
     <Pagination />

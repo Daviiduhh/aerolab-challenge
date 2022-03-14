@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <img class="header__logo" src="../assets/aerolab-logo.svg" alt="Logo aerolab" />
-    <div class="header__points">
+    <div class="header__points" @click="toggleCardPoints">
       <img
         class="header__points__logo"
         src="../assets/icons/aerolab-logo-white.svg"
@@ -10,8 +10,25 @@
       <p class="header__points__points gradient-text">1000</p>
       <img class="header__points__arrow" src="../assets/icons/arrow-down.svg" alt="Arrow icon">
     </div>
+    <CardPoints v-show="mostrar == true"/>
   </header>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      mostrar: false
+    }
+  },
+  methods: {
+    toggleCardPoints() {
+      this.mostrar = !this.mostrar
+      console.log(this.mostrar)
+    }
+  }
+}
+</script>
 
 <style>
 .header {

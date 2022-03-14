@@ -1,8 +1,7 @@
 <template>
-  <div class="card" v-show="mostrar">
+  <div class="card">
     <div class="card__top">
       <h4 class="card__top__title">Add Balance</h4>
-      <img src="../assets/icons/arrow-up.svg" alt="Cerrar/Abrir menu">
     </div>
     <div class="card__bottom">
       <div class="card__card">
@@ -25,32 +24,14 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      mostrar: false
-    }
-  },
-  methods: {
-    toggleMenu() {
-      this.mostrar != this.mostrar
-    }
-  }
-}
-</script>
-
 <style scoped>
 .card {
   position: absolute;
   right: 20px;
-  top: 20px;
+  top: 90px;
 }
 
 .card__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   border-radius: 16px 16px 0 0;
   border: 1px solid #dae4f2;
   width: 312px;
