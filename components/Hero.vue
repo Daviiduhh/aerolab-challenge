@@ -18,27 +18,24 @@
         />
       </a>
     </div>
-    <div class="hero__graph gradient-bg">
+    <div class="hero__graph">
       <img
         class="hero__graph__img"
         src="../assets/illustrations/hero-responsive.svg"
         alt="Decoration img"
       />
-      <div class="instructions">
-        <CardInstructions />
-        <CardInstructions />
-        <CardInstructions />
-      </div>
+      <Instructions class="v--mobile--flex" />
     </div>
+    <Instructions class="hero__instructions v--desktop--flex gradient-bg" />
   </section>
 </template>
 
 <script>
-import CardInstructions from './CardInstructions.vue'
+import Instructions from './Instructions.vue'
 
 export default {
   components: {
-    CardInstructions,
+    Instructions,
   },
 }
 </script>
@@ -105,6 +102,24 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  background: rgb(114, 150, 235);
+  background: -moz-linear-gradient(
+    102deg,
+    rgba(114, 150, 235, 1) 0%,
+    rgba(234, 192, 233, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    102deg,
+    rgba(114, 150, 235, 1) 0%,
+    rgba(234, 192, 233, 1) 100%
+  );
+  background: linear-gradient(
+    102deg,
+    rgba(114, 150, 235, 1) 0%,
+    rgba(234, 192, 233, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#7296eb",endColorstr="#eac0e9",GradientType=1);
 }
 
 .hero__graph__img {
@@ -116,19 +131,20 @@ export default {
   overflow-x: hidden;
 }
 
-.instructions {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  padding-bottom: 32px;
+.hero__instructions {
+  grid-column: 1 / 3;
 }
 
-@media (min-width: 1024px) {
-  .instructions {
-    flex-direction: row;
-    gap: 8px;
+@media (min-width: 1920px) {
+  .hero {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero__graph {
+    background: #fff;
+    background-color: #fff;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff",endColorstr="#fff",GradientType=1);
   }
 }
 </style>

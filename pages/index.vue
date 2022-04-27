@@ -27,7 +27,12 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #252f3d;
   -webkit-text-fill-color: #252f3d;
 }
@@ -115,7 +120,7 @@ p {
   font-weight: 600;
 }
 .btn:hover {
-  opacity: 0.9; 
+  opacity: 0.9;
 }
 .btn:active {
   transform: scale(0.9);
@@ -128,5 +133,39 @@ p {
 .notselected {
   background-color: #e6f0ff;
   padding: 8px 16px;
+}
+
+.v--desktop,
+.v--desktop--flex,
+.v--desktop--grid {
+  display: none !important;
+}
+
+.v--mobile {
+  display: block !important;
+}
+.v--mobile--flex {
+  display: flex !important;
+}
+.v--mobile--grid {
+  display: grid !important;
+}
+
+@media (min-width: 1920px) {
+  .v--desktop{
+    display: block !important;
+  }
+  .v--desktop--flex{
+    display: flex !important;
+  }
+  .v--desktop--grid {
+    display: grid !important;
+  }
+
+  .v--mobile,
+  .v--mobile--flex,
+  .v--mobile--grid {
+    display: none !important;
+  }
 }
 </style>
