@@ -38,13 +38,18 @@ import CardInstructions from './CardInstructions.vue'
 
 export default {
   components: {
-    CardInstructions
-  }
+    CardInstructions,
+  },
 }
 </script>
 
 <style>
+.hero {
+  width: auto;
+}
+
 .hero__intro {
+  width: auto;
   padding: 0 30px;
   display: flex;
   flex-direction: column;
@@ -120,4 +125,10 @@ export default {
   padding-bottom: 32px;
 }
 
+@media (min-width: 1024px) {
+  .instructions {
+    flex-direction: row;
+    gap: 8px;
+  }
+}
 </style>

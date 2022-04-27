@@ -60,4 +60,23 @@
   grid-template-columns: repeat(1, 1fr);
   gap: 48px;
 }
+
+@media (min-width: 1024px) {
+  .filter {
+    width: 256px;
+  }
+
+  .sortby {
+    justify-content: flex-start;
+    gap: 12px;
+  }
+  .sortby button {
+    width: 165px;
+  }
+
+  .products {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  }
+}
 </style>

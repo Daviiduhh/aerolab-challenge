@@ -64,4 +64,21 @@
     align-items: center;
     gap: 10px;
 }
+
+@media (min-width: 1024px) {
+    .card__top {
+    height: 350px;
+    width: 311px;
+}
+
+.card__bottom {
+    height: 80px;
+    width: 311px;
+}
+
+.card__btn {
+    width: 311px;
+    height: 56px;
+}
+}
 </style>

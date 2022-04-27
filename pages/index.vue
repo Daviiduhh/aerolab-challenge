@@ -24,6 +24,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   line-height: 24px;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
