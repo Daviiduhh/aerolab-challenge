@@ -5,23 +5,23 @@
         <span class="gradient-text">tech</span> products
       </h2>
       <select class="filter" name="tags" id="tags">
-          <option value="" selected>All products</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+        <option value="" selected>All products</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
       </select>
       <div class="sortby">
-          <button class="btn selected gradient">Most recent</button>
-          <button class="btn notselected">Lowest price</button>
-          <button class="btn notselected">Highest price</button>
+        <button class="btn selected gradient">Most recent</button>
+        <button class="btn notselected">Lowest price</button>
+        <button class="btn notselected">Highest price</button>
       </div>
     </header>
     <div class="products">
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
+      <CardProduct />
+      <CardProduct />
+      <CardProduct />
+      <CardProduct />
+      <CardProduct />
     </div>
   </section>
 </template>
@@ -33,13 +33,13 @@
 }
 
 .filter {
-    width: 100%;
-    background-color: #fff;
-    border: 1px solid #dae4f2;
-    border-radius: 16px;
-    padding: 16px 8px;
-    font-weight: 600;
-    margin-bottom: 24px;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #dae4f2;
+  border-radius: 16px;
+  padding: 16px 8px;
+  font-weight: 600;
+  margin-bottom: 24px;
 }
 
 .sortby {
@@ -58,6 +58,7 @@
 .products {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+  justify-items: center;
   gap: 48px;
 }
 
@@ -75,8 +76,18 @@
   }
 
   .products {
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 48px;
+    column-gap: 24px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .products {
+    width: 80%;
+    margin: 0 auto;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 80px;
   }
 }
 </style>
