@@ -11,17 +11,37 @@
         <option value="3">3</option>
       </select>
       <div class="sortby">
-        <button class="btn selected gradient">Most recent</button>
-        <button class="btn notselected">Lowest price</button>
-        <button class="btn notselected">Highest price</button>
+        <!-- <button
+          class="btn"
+          :class="order == 'original' ? 'selected gradient' : 'notselected'"
+          @click="mostRecent"
+        >
+          Most recent
+        </button> -->
+        <button
+          class="btn"
+          :class="order == 'lowest' ? 'selected gradient' : 'notselected'"
+          @click="lowest"
+        >
+          Lowest price
+        </button>
+        <button
+          class="btn"
+          :class="order == 'highest' ? 'selected gradient' : 'notselected'"
+          @click="highest"
+        >
+          Highest price
+        </button>
       </div>
     </header>
     <div class="products">
-      <CardProduct v-for="product in products" :key="product._id"
-      :category="product.category"
-      :cost="product.cost"
-      :img="product.img.url"
-      :name="product.name"
+      <CardProduct
+        v-for="product in products"
+        :key="product._id"
+        :category="product.category"
+        :cost="product.cost"
+        :img="product.img.url"
+        :name="product.name"
       />
     </div>
   </section>
@@ -31,19 +51,43 @@
 export default {
   data() {
     return {
-      products: []
+      products: [],
+      originalProducts: [],
+      order: 'original',
     }
   },
   async fetch() {
     const token =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWVjYTNiNjVkMjlkMTAwMjEyNWNiYTkiLCJpYXQiOjE2NDI4OTgzNTh9.eytpINpi9hQeKNvSLo2nCYm-CjN0Y4nr6y6Iag3MKRQ'
-    this.products = await this.$axios.$get('https://coding-challenge-api.aerolab.co/products', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-
-    console.log(this.products);
+    this.products = await this.$axios.$get(
+      'https://coding-challenge-api.aerolab.co/products',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+    this.originalProducts = this.products
+  },
+  methods: {
+    lowest() {
+      this.products.sort((a, b) => {
+        return a.cost - b.cost
+      })
+      this.order = 'lowest'
+    },
+    highest() {
+      this.products.sort((a, b) => {
+        return b.cost - a.cost
+      })
+      this.order = 'highest'
+    },
+    mostRecent() {
+      this.products.sort((a, b) => {
+        return b._id - a._id
+      })
+      this.order = 'original'
+    }
   },
   mounted() {
     this.fetch
