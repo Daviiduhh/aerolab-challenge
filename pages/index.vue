@@ -26,6 +26,7 @@ export default {
       },
     })
 
+    this.$store.commit('setUserInfo', this.data)
     console.log(this.data);
   },
   mounted() {

@@ -7,7 +7,7 @@
         src="../assets/icons/aerolab-logo-white.svg"
         alt="Aerolab logo points"
       />
-      <p class="header__points__points gradient-text">1000</p>
+      <p class="header__points__points gradient-text">{{ $store.state.userInfo.points }}</p>
       <img class="header__points__arrow" src="../assets/icons/arrow-down.svg" alt="Arrow icon">
     </div>
     <CardPoints v-show="mostrar == true"/>
@@ -26,6 +26,9 @@ export default {
       this.mostrar = !this.mostrar
       console.log(this.mostrar)
     }
+  },
+  mounted() {
+    console.log(this.$store.state.userInfo);
   }
 }
 </script>

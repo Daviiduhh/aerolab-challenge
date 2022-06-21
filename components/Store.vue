@@ -11,13 +11,13 @@
         <option value="3">3</option>
       </select>
       <div class="sortby">
-        <!-- <button
+        <button
           class="btn"
           :class="order == 'original' ? 'selected gradient' : 'notselected'"
           @click="mostRecent"
         >
           Most recent
-        </button> -->
+        </button>
         <button
           class="btn"
           :class="order == 'lowest' ? 'selected gradient' : 'notselected'"
@@ -42,6 +42,7 @@
         :cost="product.cost"
         :img="product.img.url"
         :name="product.name"
+        :_id="product._id"
       />
     </div>
   </section>
@@ -52,7 +53,6 @@ export default {
   data() {
     return {
       products: [],
-      originalProducts: [],
       order: 'original',
     }
   },
@@ -67,7 +67,6 @@ export default {
         },
       }
     )
-    this.originalProducts = this.products
   },
   methods: {
     lowest() {
@@ -84,10 +83,19 @@ export default {
     },
     mostRecent() {
       this.products.sort((a, b) => {
-        return b._id - a._id
+        let aId = a._id,
+          bId = b._id
+
+        if (aId < bId) {
+          return -1
+        }
+        if (aId > bId) {
+          return 1
+        }
+        return 0
       })
       this.order = 'original'
-    }
+    },
   },
   mounted() {
     this.fetch
