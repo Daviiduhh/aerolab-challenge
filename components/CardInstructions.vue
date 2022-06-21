@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <img
-      class="card__img"
+      class="card__img gradient-bg"
       src="../assets/icons/walkthroug-1-responsive.png"
       alt="Instruction image"
     />
@@ -26,9 +26,23 @@
   width: 311px;
   height: 384px;
   background: transparent;
-  border: 12px solid rgba(255, 255, 255, 0.7);
+  border: 12px solid rgb(255, 255, 255);
   box-sizing: border-box;
   box-shadow: 0px 2px 40px rgba(0, 0, 0, 0.05);
+  border-radius: 32px;
+}
+
+.card::after {
+  content: "";
+  width: 311px;
+  height: 384px;
+  position: absolute;
+  z-index: 1;
+  top: -12px;
+  left: -12px;
+  right: 0px;
+  bottom: 0px;
+  border: 0.1px solid #DAE4F2;
   border-radius: 32px;
 }
 
@@ -36,7 +50,7 @@
   margin: 0 auto;
   height: 245px;
   width: 311px;
-  border-radius: 32px 32px 0 0;
+  border-radius: 20px 20px 0 0;
 }
 
 .card__info {

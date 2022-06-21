@@ -1,8 +1,8 @@
 <template>
   <div class="instructions">
-    <CardInstructions class="rotate--left"/>
-    <CardInstructions />
-    <CardInstructions class="rotate--right"/>
+    <CardInstructions class="rotate--left" />
+    <CardInstructions class="center" />
+    <CardInstructions class="rotate--right" />
   </div>
 </template>
 
@@ -33,17 +33,36 @@ export default {
   }
 }
 
-
 @media (min-width: 1920px) {
-    .instructions {
-      height: 528px;
-    }
+  .instructions {
+    width: 100%;
+    height: 528px;
+    position: relative;
+  }
 
-    .rotate--left {
-        transform: rotate(-3deg);
-    }
-    .rotate--right {
-        transform: rotate(3deg);
-    }
+  .center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 2;
+  }
+  .rotate--left {
+    transform: rotate(-3deg);
+    position: absolute;
+    left: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+  }
+  .rotate--right {
+    transform: rotate(3deg);
+    position: absolute;
+    right: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 3;
+  }
 }
 </style>
