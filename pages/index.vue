@@ -12,6 +12,25 @@
 <script>
 export default {
   name: 'IndexPage',
+  data() {
+    return {
+      data: {},
+    }
+  },
+  async fetch() {
+    const token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWVjYTNiNjVkMjlkMTAwMjEyNWNiYTkiLCJpYXQiOjE2NDI4OTgzNTh9.eytpINpi9hQeKNvSLo2nCYm-CjN0Y4nr6y6Iag3MKRQ'
+    this.data = await this.$axios.$get('https://coding-challenge-api.aerolab.co/user/me', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    console.log(this.data);
+  },
+  mounted() {
+    this.fetch
+  },
 }
 </script>
 
@@ -152,10 +171,10 @@ p {
 }
 
 @media (min-width: 1920px) {
-  .v--desktop{
+  .v--desktop {
     display: block !important;
   }
-  .v--desktop--flex{
+  .v--desktop--flex {
     display: flex !important;
   }
   .v--desktop--grid {

@@ -17,14 +17,39 @@
       </div>
     </header>
     <div class="products">
-      <CardProduct />
-      <CardProduct />
-      <CardProduct />
-      <CardProduct />
-      <CardProduct />
+      <CardProduct v-for="product in products" :key="product._id"
+      :category="product.category"
+      :cost="product.cost"
+      :img="product.img.url"
+      :name="product.name"
+      />
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      products: []
+    }
+  },
+  async fetch() {
+    const token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWVjYTNiNjVkMjlkMTAwMjEyNWNiYTkiLCJpYXQiOjE2NDI4OTgzNTh9.eytpINpi9hQeKNvSLo2nCYm-CjN0Y4nr6y6Iag3MKRQ'
+    this.products = await this.$axios.$get('https://coding-challenge-api.aerolab.co/products', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    console.log(this.products);
+  },
+  mounted() {
+    this.fetch
+  },
+}
+</script>
 
 <style>
 .store__title {

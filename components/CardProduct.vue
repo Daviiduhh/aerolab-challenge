@@ -3,21 +3,33 @@
     <div class="card__top">
       <img
         class="card__img"
-        src="../assets/product-pics/AcerAspire-x1.png"
+        :src="img"
         alt="Product image"
       />
     </div>
     <div class="card__bottom">
-      <h3 class="card__title">Go Pro Hero 4</h3>
-      <p class="card__text">Cameras</p>
+      <h3 class="card__title" v-text="name"></h3>
+      <p class="card__text" v-text="category"></p>
     </div>
     <button class="card__btn btn gradient">
       <p>Redeem for</p>
       <img src="../assets/icons/aerolab-logo-white.svg" alt="points icon" />
-      <p>12.500</p>
+      <p v-text="cost"></p>
     </button>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    category: String,
+    cost: Number,
+    img: String,
+    name: String,
+    _id: String
+  }
+}
+</script>
 
 <style scoped>
 .card__top {
