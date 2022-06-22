@@ -2,9 +2,8 @@
   <main>
     <Header />
     <Hero />
-    <Store />
-    <Pagination />
-    <NumberProducts />
+    <Store v-on:numberOfProducts="numberOfProducts" />
+    <NumberProducts :numberOfProducts="products" />
     <Footer />
   </main>
 </template>
@@ -14,7 +13,12 @@ export default {
   name: 'IndexPage',
   data() {
     return {
-      data: {},
+      products: 8
+    }
+  },
+  methods: {
+    numberOfProducts(number) {
+      this.products = number
     }
   },
   async fetch() {

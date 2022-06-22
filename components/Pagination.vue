@@ -4,17 +4,28 @@
       <img
         src="../assets/icons/chevron-defaultL.svg"
         alt="Decrease pagination"
+        @click="$emit('decrease')"
       />
     </button>
-    <p>Page <span class="gradient-text">1 of 4</span></p>
+    <p>Page <span class="gradient-text">{{ `${page} of ${pages}` }}</span></p>
     <button class="pagination__btn btn">
       <img
         src="../assets/icons/chevron-defaultR.svg"
         alt="Increase pagination"
+        @click="$emit('increase')"
       />
     </button>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    page: Number,
+    pages: Number
+  }
+}
+</script>
 
 <style>
 .pagination {

@@ -4,38 +4,52 @@
       <h2 class="store__title">
         <span class="gradient-text">tech</span> products
       </h2>
-      <select class="filter" name="tags" id="tags">
-        <option value="" selected>All products</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-      </select>
-      <div class="sortby">
-        <button
-          class="btn"
-          :class="order == 'original' ? 'selected gradient' : 'notselected'"
-          @click="mostRecent"
-        >
-          Most recent
-        </button>
-        <button
-          class="btn"
-          :class="order == 'lowest' ? 'selected gradient' : 'notselected'"
-          @click="lowest"
-        >
-          Lowest price
-        </button>
-        <button
-          class="btn"
-          :class="order == 'highest' ? 'selected gradient' : 'notselected'"
-          @click="highest"
-        >
-          Highest price
-        </button>
+      <div class="options">
+        <div class="options__filter">
+          <p>Filter by:</p>
+
+          <select class="filter" name="tags" id="tags">
+            <option value="" selected>All products</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div class="sortby">
+          <p>Sort by:</p>
+          <button
+            class="btn"
+            :class="order == 'original' ? 'selected gradient' : 'notselected'"
+            @click="mostRecent"
+          >
+            Most recent
+          </button>
+          <button
+            class="btn"
+            :class="order == 'lowest' ? 'selected gradient' : 'notselected'"
+            @click="lowest"
+          >
+            Lowest price
+          </button>
+          <button
+            class="btn"
+            :class="order == 'highest' ? 'selected gradient' : 'notselected'"
+            @click="highest"
+          >
+            Highest price
+          </button>
+        </div>
+        <Pagination
+          :pages="pages"
+          :page="page"
+          @increase="increase"
+          @decrease="decrease"
+        />
       </div>
     </header>
     <div class="products">
-      <CardProduct
+      <!-- 
+        <CardProduct
         v-for="product in products"
         :key="product._id"
         :category="product.category"
@@ -43,17 +57,39 @@
         :img="product.img.url"
         :name="product.name"
         :_id="product._id"
+      /> 
+      -->
+      <CardProduct
+        v-for="(product, index) in productsAux"
+        :key="product.id"
+        :category="products[start + index].category"
+        :cost="products[start + index].cost"
+        :img="products[start + index].img.url"
+        :name="products[start + index].name"
+        :_id="products[start + index]._id"
       />
     </div>
+    <Pagination
+      :pages="pages"
+      :page="page"
+      @increase="increase"
+      @decrease="decrease"
+    />
   </section>
 </template>
 
 <script>
+import Pagination from './Pagination.vue'
+
 export default {
   data() {
     return {
+      productsAux: ['', '', '', '', '', '', '', ''],
       products: [],
+      productsLenght: 0,
       order: 'original',
+      start: 0,
+      page: 1,
     }
   },
   async fetch() {
@@ -67,8 +103,28 @@ export default {
         },
       }
     )
+
+    this.productsLenght = this.products.length
+  },
+  computed: {
+    pages() {
+      return this.productsLenght / 8
+    },
+    numberOfProducts() {
+      return start + 8;
+    }
   },
   methods: {
+    decrease() {
+      this.page--
+      this.start = (this.page - 1) * 8
+      this.$emit('numberOfProducts', this.start + 8)
+    },
+    increase() {
+      this.page++
+      this.start = (this.page - 1) * 8
+      this.$emit('numberOfProducts', this.start + 8)
+    },
     lowest() {
       this.products.sort((a, b) => {
         return a.cost - b.cost
@@ -104,6 +160,10 @@ export default {
 </script>
 
 <style>
+.pagination {
+  display: none;
+}
+
 .store__title {
   text-align: center;
   margin-bottom: 40px;
@@ -160,9 +220,47 @@ export default {
 }
 
 @media (min-width: 1920px) {
+  .store__title {
+    width: 80%;
+    margin: 170px auto 0 auto;
+    font-size: 48px;
+  }
+
+  .pagination {
+    margin: 0 auto;
+    display: flex;
+  }
+
+  .options {
+    width: 80%;
+    margin: 70px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .options__filter {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .filter {
+    margin: 0;
+  }
+
+  .sortby {
+    overflow-x: hidden;
+    margin: 0;
+  }
+
+  .store__title {
+    text-align: left;
+  }
+
   .products {
     width: 80%;
-    margin: 0 auto;
+    margin: 0 auto 70px auto;
     grid-template-columns: repeat(4, 1fr);
     row-gap: 80px;
   }
