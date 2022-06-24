@@ -24,6 +24,7 @@ export default {
   align-items: center;
   gap: 24px;
   padding-bottom: 32px;
+  position: relative;
 }
 
 @media (min-width: 1024px) {
@@ -37,7 +38,6 @@ export default {
   .instructions {
     width: 100%;
     height: 528px;
-    position: relative;
   }
 
   .center {

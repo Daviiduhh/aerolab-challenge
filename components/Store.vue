@@ -8,11 +8,12 @@
         <div class="options__filter">
           <p>Filter by:</p>
 
-          <select class="filter" name="tags" id="tags">
-            <option value="" selected>All products</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+          <select class="filter" v-model="filter" name="tags" id="tags">
+            <option value="all" selected="true">All products</option>
+            <option value="Gaming">Gaming</option>
+            <option value="Audio">Audio</option>
+            <option value="Smart Home">Smart Home</option>
+            <option value="Monitors & TV">Monitors & TV</option>
           </select>
         </div>
         <div class="sortby">
@@ -62,11 +63,11 @@
       <CardProduct
         v-for="(product, index) in productsAux"
         :key="product.id"
-        :category="products[start + index].category"
-        :cost="products[start + index].cost"
-        :img="products[start + index].img.url"
-        :name="products[start + index].name"
-        :_id="products[start + index]._id"
+        :category="filteredProducts[start + index].category"
+        :cost="filteredProducts[start + index].cost"
+        :img="filteredProducts[start + index].img.url"
+        :name="filteredProducts[start + index].name"
+        :_id="filteredProducts[start + index]._id"
       />
     </div>
     <Pagination
@@ -79,17 +80,15 @@
 </template>
 
 <script>
-import Pagination from './Pagination.vue'
-
 export default {
   data() {
     return {
-      productsAux: ['', '', '', '', '', '', '', ''],
       products: [],
       productsLenght: 0,
       order: 'original',
       start: 0,
       page: 1,
+      filter: 'all',
     }
   },
   async fetch() {
@@ -104,24 +103,46 @@ export default {
       }
     )
 
-    this.productsLenght = this.products.length
+    this.productsLenght = this.filteredProducts.length
   },
   computed: {
+    filteredProducts() {
+      if (this.filter == 'all') {
+        return this.products
+      }
+      return this.products.filter((product) => {
+        if (product.category === this.filter) {
+          console.log(product)
+          return product
+        }
+      })
+    },
+    productsAux() {
+      if (this.filteredProducts.length >= 8) {
+        return ['', '', '', '', '', '', '', '']
+      }
+
+      const array = []
+      for (let index = 0; index < this.filteredProducts.length; index++) {
+        array.push('')
+      }
+      return array
+    },
     pages() {
       return this.productsLenght / 8
     },
     numberOfProducts() {
-      return start + 8;
-    }
+      return start + 8
+    },
   },
   methods: {
     decrease() {
-      this.page--
+      this.page > 1 ? this.page-- : (this.page = this.page)
       this.start = (this.page - 1) * 8
       this.$emit('numberOfProducts', this.start + 8)
     },
     increase() {
-      this.page++
+      this.page < this.pages ? this.page++ : (this.page = this.page)
       this.start = (this.page - 1) * 8
       this.$emit('numberOfProducts', this.start + 8)
     },
