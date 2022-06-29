@@ -31,7 +31,6 @@ export default {
     })
 
     this.$store.commit('setUserInfo', this.data)
-    console.log(this.data);
   },
   mounted() {
     this.fetch
@@ -157,6 +156,14 @@ p {
 .notselected {
   background-color: #e6f0ff;
   padding: 8px 16px;
+}
+
+.disabled {
+  background: #E6EDF7;
+  color: #7C899C;
+}
+.disabled > * {
+  color: #7C899C;
 }
 
 .v--desktop,

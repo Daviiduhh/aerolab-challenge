@@ -10,10 +10,17 @@
 
           <select class="filter" v-model="filter" name="tags" id="tags">
             <option value="all" selected="true">All products</option>
+            <option value="Phones">Phones</option>
             <option value="Gaming">Gaming</option>
+            <option value="Laptops">Laptops</option>
             <option value="Audio">Audio</option>
             <option value="Smart Home">Smart Home</option>
             <option value="Monitors & TV">Monitors & TV</option>
+            <option value="PC Accesories">PC Accessories</option>
+            <option value="Phone Accessories">Phone Accessories</option>
+            <option value="Cameras">Cameras</option>
+            <option value="Drones">Drones</option>
+            <option value="Tablets & E-readers">Tablets & E-readers</option>
           </select>
         </div>
         <div class="sortby">
@@ -68,6 +75,7 @@
         :img="filteredProducts[start + index].img.url"
         :name="filteredProducts[start + index].name"
         :_id="filteredProducts[start + index]._id"
+        @notify="notify"
       />
     </div>
     <Pagination
@@ -76,10 +84,23 @@
       @increase="increase"
       @decrease="decrease"
     />
+    <div class="notifications">
+      <Notification
+        v-for="(notification, index) in notifications"
+        :key="notification.id"
+        :color="notification.color"
+        :icon="notification.icon"
+        :message="notification.message"
+        :index="index"
+        @deleteNotification="deleteNotification"
+      />
+    </div>
   </section>
 </template>
 
 <script>
+import Notification from './Notification.vue'
+
 export default {
   data() {
     return {
@@ -89,6 +110,7 @@ export default {
       start: 0,
       page: 1,
       filter: 'all',
+      notifications: [],
     }
   },
   async fetch() {
@@ -102,7 +124,6 @@ export default {
         },
       }
     )
-
     this.productsLenght = this.filteredProducts.length
   },
   computed: {
@@ -112,7 +133,6 @@ export default {
       }
       return this.products.filter((product) => {
         if (product.category === this.filter) {
-          console.log(product)
           return product
         }
       })
@@ -121,7 +141,6 @@ export default {
       if (this.filteredProducts.length >= 8) {
         return ['', '', '', '', '', '', '', '']
       }
-
       const array = []
       for (let index = 0; index < this.filteredProducts.length; index++) {
         array.push('')
@@ -132,10 +151,24 @@ export default {
       return this.productsLenght / 8
     },
     numberOfProducts() {
-      return start + 8
+      if (this.productsAux.length == 8) {
+        return start + 8
+      } else {
+        return start + this.productsAux.length
+      }
     },
   },
   methods: {
+    deleteNotification(index) {
+      this.notifications.splice(index, 1)
+    },
+    notify(color, icon, message) {
+      this.notifications.push({
+        color: color,
+        icon: icon,
+        message: message,
+      })
+    },
     decrease() {
       this.page > 1 ? this.page-- : (this.page = this.page)
       this.start = (this.page - 1) * 8
@@ -162,7 +195,6 @@ export default {
       this.products.sort((a, b) => {
         let aId = a._id,
           bId = b._id
-
         if (aId < bId) {
           return -1
         }
@@ -177,6 +209,7 @@ export default {
   mounted() {
     this.fetch
   },
+  components: { Notification },
 }
 </script>
 
@@ -218,6 +251,18 @@ export default {
   grid-template-columns: repeat(1, 1fr);
   justify-items: center;
   gap: 48px;
+}
+
+.notifications {
+  position: fixed;
+  left: 100px;
+  bottom: 35px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
 }
 
 @media (min-width: 1024px) {
