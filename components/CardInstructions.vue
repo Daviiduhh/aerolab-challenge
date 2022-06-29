@@ -23,6 +23,7 @@
 
 <style scoped>
 .card {
+  position: relative;
   width: 311px;
   height: 384px;
   background: transparent;

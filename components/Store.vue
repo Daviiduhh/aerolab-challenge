@@ -48,6 +48,7 @@
           </button>
         </div>
         <Pagination
+          style="margin: 0"
           :pages="pages"
           :page="page"
           @increase="increase"

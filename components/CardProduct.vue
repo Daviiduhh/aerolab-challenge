@@ -46,9 +46,32 @@ export default {
         )
 
         if (res.success === 'false') {
-          this.$emit('notify', '#E07F4F', '/icons/cross.svg', 'There was a problem with the transaction')
+          this.$emit(
+            'notify',
+            '#E07F4F',
+            '/icons/cross.svg',
+            'There was a problem with the transaction'
+          )
         } else {
-          this.$emit('notify', '#29CC74', '/icons/tick.svg', this.name + ' redeemed successfully')
+          this.$emit(
+            'notify',
+            '#29CC74',
+            '/icons/tick.svg',
+            this.name + ' redeemed successfully'
+          )
+
+          const token =
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWVjYTNiNjVkMjlkMTAwMjEyNWNiYTkiLCJpYXQiOjE2NDI4OTgzNTh9.eytpINpi9hQeKNvSLo2nCYm-CjN0Y4nr6y6Iag3MKRQ'
+          this.data = await this.$axios.$get(
+            'https://coding-challenge-api.aerolab.co/user/me',
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+
+          this.$store.commit('setUserInfo', this.data)
         }
       }
     },
@@ -62,7 +85,7 @@ export default {
     },
     amount() {
       const points = this.$store.state.userInfo.points
-      return  this.requiredPoints ? this.cost : this.cost - points
+      return this.requiredPoints ? this.cost : this.cost - points
     },
     redeemText() {
       return this.requiredPoints ? 'Redeem for' : 'You need'
