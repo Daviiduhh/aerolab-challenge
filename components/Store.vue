@@ -6,7 +6,7 @@
       </h2>
       <div class="options">
         <div class="options__filter">
-          <p>Filter by:</p>
+          <p class="options__text">Filter by:</p>
 
           <select class="filter" v-model="filter" name="tags" id="tags">
             <option value="all" selected="true">All products</option>
@@ -24,7 +24,7 @@
           </select>
         </div>
         <div class="sortby">
-          <p>Sort by:</p>
+          <p class="options__text">Sort by:</p>
           <button
             class="btn"
             :class="order == 'original' ? 'selected gradient' : 'notselected'"
@@ -48,6 +48,7 @@
           </button>
         </div>
         <Pagination
+          class="pagination--top"
           style="margin: 0"
           :pages="pages"
           :page="page"
@@ -215,7 +216,7 @@ export default {
 </script>
 
 <style>
-.pagination {
+.pagination--top {
   display: none;
 }
 
@@ -266,6 +267,10 @@ export default {
   gap: 12px;
 }
 
+.options__text {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   .filter {
     width: 256px;
@@ -283,6 +288,26 @@ export default {
     grid-template-columns: repeat(3, 1fr);
     row-gap: 48px;
     column-gap: 24px;
+  }
+
+  .options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 27px;
+    margin-bottom: 60px;
+  }
+
+  .options__filter,
+  .sortby {
+    grid-column: 1 / 2;
+    margin: 0;
+  }
+
+  .pagination--top {
+    grid-column: 2 / 3;
+    place-self: end;
+    margin: 0 auto;
+    display: flex;
   }
 }
 
@@ -304,6 +329,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .options__text {
+    display: block;
   }
 
   .options__filter {

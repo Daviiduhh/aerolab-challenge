@@ -36,6 +36,7 @@ export default {
 
 @media (min-width: 1920px) {
   .instructions {
+    display: block;
     width: 100%;
     height: 528px;
   }
@@ -44,6 +45,7 @@ export default {
     position: absolute;
     left: 0;
     right: 0;
+    bottom: 40px;
     margin-left: auto;
     margin-right: auto;
     z-index: 2;
@@ -51,7 +53,7 @@ export default {
   .rotate--left {
     transform: rotate(-3deg);
     position: absolute;
-    left: 500px;
+    left: 190px;
     margin-left: auto;
     margin-right: auto;
     z-index: 1;
@@ -59,7 +61,7 @@ export default {
   .rotate--right {
     transform: rotate(3deg);
     position: absolute;
-    right: 500px;
+    right: 190px;
     margin-left: auto;
     margin-right: auto;
     z-index: 3;
