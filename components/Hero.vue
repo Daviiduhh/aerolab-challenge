@@ -59,18 +59,18 @@ export default {
   background-size: cover;
 }
 
-.hero__intro__subtitle {
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  line-height: 24px;
-}
-
 .hero__intro__title {
   text-align: center;
   margin-bottom: 24px;
 }
 .hero__intro__title--span {
   -webkit-text-fill-color: #252f3d;
+}
+
+.hero__intro__subtitle {
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  line-height: 24px;
 }
 
 .hero__intro__text {
@@ -141,10 +141,53 @@ export default {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .hero__intro,
+  .hero__graph {
+    min-height: 800px;
+  }
+
+  .hero__intro {
+    margin-left: auto;
+    width: 610px;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hero__intro__title {
+    font-size: 200px;
+    text-align: left;
+  }
+  .hero__intro__title--span {
+    -webkit-text-fill-color: #252f3d;
+  }
+
+  .hero__intro__subtitle {
+    font-size: 18px;
+  }
+
+  .hero__intro__text {
+    width: 45ch;
+    text-align: left;
+    margin-bottom: 64px;
+  }
+
+  .hero__intro__button {
+    height: 80px;
+  }
+  .hero__intro__button__text {
+    font-size: 18px;
+  }
+
   .hero__graph {
     background: #fff;
     background-color: #fff;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff",endColorstr="#fff",GradientType=1);
+  }
+
+  .hero__graph__img {
+    height: 795px;
+    width: 897px;
   }
 }
 </style>
