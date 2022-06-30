@@ -1,16 +1,26 @@
 <template>
   <header class="header">
-    <img class="header__logo" src="../assets/aerolab-logo.svg" alt="Logo aerolab" />
+    <img
+      class="header__logo"
+      src="../assets/aerolab-logo.svg"
+      alt="Logo aerolab"
+    />
     <div class="header__points" @click="toggleCardPoints">
       <img
         class="header__points__logo"
         src="../assets/icons/aerolab-logo-white.svg"
         alt="Aerolab logo points"
       />
-      <p class="header__points__points gradient-text">{{ $store.state.userInfo.points }}</p>
-      <img class="header__points__arrow" src="../assets/icons/arrow-down.svg" alt="Arrow icon">
+      <p class="header__points__points gradient-text">
+        {{ $store.state.userInfo.points }}
+      </p>
+      <img
+        class="header__points__arrow"
+        src="../assets/icons/arrow-down.svg"
+        alt="Arrow icon"
+      />
     </div>
-    <CardPoints v-show="mostrar == true"/>
+    <CardPoints v-show="mostrar == true" />
   </header>
 </template>
 
@@ -18,18 +28,18 @@
 export default {
   data() {
     return {
-      mostrar: false
+      mostrar: false,
     }
   },
   methods: {
     toggleCardPoints() {
       this.mostrar = !this.mostrar
       console.log(this.mostrar)
-    }
+    },
   },
   mounted() {
-    console.log(this.$store.state.userInfo);
-  }
+    console.log(this.$store.state.userInfo)
+  },
 }
 </script>
 
@@ -55,16 +65,23 @@ export default {
 }
 
 .header__points__logo {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 .header__points__points {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .header__points__arrow {
-    width: 15px;
-    height: 7.5px;
+  width: 15px;
+  height: 7.5px;
+}
+
+@media (min-width: 1920px) {
+  .header {
+    max-width: 1464px;
+    margin: 0 auto;
+  }
 }
 </style>

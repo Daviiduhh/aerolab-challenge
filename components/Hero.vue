@@ -147,8 +147,9 @@ export default {
   }
 
   .hero__intro {
+    justify-self: start;
     margin-left: auto;
-    width: 610px;
+    width: 760px;
     justify-content: center;
     align-items: flex-start;
     text-align: left;

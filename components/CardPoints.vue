@@ -172,4 +172,10 @@ export default {
   justify-content: center;
   gap: 8px;
 }
+
+@media (min-width: 1920px) {
+  .card {
+  right: 239px;
+}
+}
 </style>
