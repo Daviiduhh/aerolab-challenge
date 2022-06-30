@@ -1,25 +1,33 @@
 <template>
   <div class="card">
-    <img
-      class="card__img gradient-bg"
-      src="../assets/icons/walkthroug-1-responsive.png"
-      alt="Instruction image"
-    />
+    <img class="card__img gradient-bg" :src="img" alt="Instruction image" />
     <div class="card__info">
       <div class="card__info__header">
         <img
           class="card__info__header__icon"
-          src="../assets/icons/walkthrough-1.svg"
+          :src="icon"
           alt=""
         />
-        <h3 class="card__info__header__title gradient-text">1-Browse</h3>
+        <h3 class="card__info__header__title gradient-text">
+          {{ index + '-' + title }}
+        </h3>
       </div>
-      <p class="card__info__text">
-        Browse our tech catalog with more than 20 top tech products
-      </p>
+      <p class="card__info__text" v-text="text"></p>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    index: Number,
+    img: String,
+    icon: String,
+    title: String,
+    text: String,
+  },
+}
+</script>
 
 <style scoped>
 .card {
@@ -66,6 +74,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  gap: 14px;
 }
 
 .card__info__header__icon {
@@ -105,8 +114,8 @@
   }
 
   .card__info__text {
-    max-width: 36ch;
-  font-size: 18px;
-}
+    max-width: 30ch;
+    font-size: 18px;
+  }
 }
 </style>

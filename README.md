@@ -1,4 +1,4 @@
-## [Demo](https://aerolab.netlify.app/).
+## [Demo](https://aerolab.netlify.app/)
 
 # aerolab-challenge
 
